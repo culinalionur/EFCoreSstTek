@@ -1,4 +1,5 @@
-﻿using EFCoreTutorialData.Models;
+﻿using EFCoreTutorialCommon;
+using EFCoreTutorialData.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System;
@@ -22,13 +23,14 @@ namespace EFCoreTutorialData.Context
         public DbSet<Course> Courses { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<StudentAddress> StudentAddresses { get; set; } 
 
         //Configure edilirken çalışacak metot
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=EFCore;Integrated Security=True; Encrypt=False");
+                optionsBuilder.UseSqlServer(StringConstants.DbConnectionString);
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
